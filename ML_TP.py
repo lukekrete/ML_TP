@@ -48,13 +48,34 @@ def main():
     plt.ylabel("Price of house")
     plt.title("Number of Bedrooms vs price of house")
     plt.show()
+    #TEST
+    #for i in range(len(features)-1):
+    #    plt.scatter(features[i+1],features[0],data=test_data)
+    #    plt.xlabel(features[i+1])
+     #   plt.ylabel(features[0])
+      #  plt.show()
+    fig, axes = plt.subplots(ncols=5, nrows=4, figsize=(20,15))
+    #for i, ax in enumerate(axes.flatten()):
+    #    if i < 19:
+    #        test_data[test_data.columns[i]].plot(color='green',ax=ax)
+    #        ax.set_title(test_data.columns[i])
+    #plt.tight_layout()
 
-    
-
+    i = 0
+    axes = axes.flatten()
+    for k,v in test_data.items():
+        sns.distplot(v,ax=axes[i])
+        i+=1
+    plt.tight_layout()
+    plt.show()
     print(d.describe())
     print()
     print("---------------------------------------------------")
-    print("Testing K-NN Classifier with a test house")
+    print("Test house to use with K-Neighbors Classifier:")
+    for i in range(18):
+        print(str(features[i+1]) + ": " + str(test[0][i]))
+    print("---------------------------------------------------")
+    print("Testing K-NN Classifier with the test house")
     knn = neighbors.KNeighborsClassifier(n_neighbors=3, metric='euclidean').fit(d,np.ravel(t))
     print("Test with k = 3 and Euclidean Distance")
     print(knn.predict(test))
@@ -86,13 +107,28 @@ def main():
     print("Testing Linear Regression with a Train/Test split of 70%/30%")
     print("Accuracy of Linear Regression when normalize = False: ",end='')
     print(r)
+    #--AVG--
+    count = 0
+    for i in range(len(prediction)):
+        count = count + prediction[i]
+    count = count/len(prediction)
+    print("Average value of a house from the predicted data = " + str(count))
+    print()
+    #-------
     lr = LinearRegression(normalize=True)
     lr = lr.fit(xtrain,ytrain)
     prediction = lr.predict(xtest)
     r = lr.score(xtest,ytest)
     print("Accuracy of Linear Regression when noramlize = True: ",end='')
     print(r)
-
+    #--AVG--
+    count = 0
+    for i in range(len(prediction)):
+        count = count + prediction[i]
+    count = count/len(prediction)
+    print("Average value of a house from the predicted data = " + str(count))
+    #-------
+    print()
     
     print("---------------------------------------------------")
     print("Testing A Random Forest Regressor with a Train/Test spit of 70%/30%")
@@ -102,18 +138,42 @@ def main():
     r = rfr.score(xtest,ytest)
     print("Accuracy of Random Forest Regressor when n_estimators = 10: ",end='')
     print(r)
+    #--AVG--
+    count = 0
+    for i in range(len(prediction)):
+        count = count + prediction[i]
+    count = count/len(prediction)
+    print("Average value of a house from the predicted data = " + str(count))
+    #-------
+    print()
     rfr = RandomForestRegressor(n_estimators=30)
     rfr = rfr.fit(xtrain,np.ravel(ytrain))
     prediction = rfr.predict(xtest)
     r = rfr.score(xtest,ytest)
     print("Accuracy of Random Forest Regressor when n_estimators = 30: ",end='')
     print(r)
+    #--AVG--
+    count = 0
+    for i in range(len(prediction)):
+        count = count + prediction[i]
+    count = count/len(prediction)
+    print("Average value of a house from the predicted data = " + str(count))
+    #-------
+    print()
     rfr = RandomForestRegressor(n_estimators=60)
     rfr = rfr.fit(xtrain,np.ravel(ytrain))
     prediction = rfr.predict(xtest)
     r = rfr.score(xtest,ytest)
     print("Accuracy of Random Forest Regressor when n_estimators = 60: ",end='')
     print(r)
+    #--AVG--
+    count = 0
+    for i in range(len(prediction)):
+        count = count + prediction[i]
+    count = count/len(prediction)
+    print("Average value of a house from the predicted data = " + str(count))
+    #-------
+    print()
     print("---------------------------------------------------")
     print("Testing K-Neighbors Regressor with a Train/Test spit of 70%/30%")
     knr = KNeighborsRegressor(n_neighbors=3)
@@ -122,15 +182,39 @@ def main():
     r = knr.score(xtest,ytest)
     print("Accuracy of K-Neighbors Regressor when k = 3: ",end='')
     print(r)
+    #--AVG--
+    count = 0
+    for i in range(len(prediction)):
+        count = count + prediction[i]
+    count = count/len(prediction)
+    print("Average value of a house from the predicted data = " + str(count))
+    #-------
+    print()
     knr = KNeighborsRegressor(n_neighbors=5)
     knr = knr.fit(xtrain,np.ravel(ytrain))
     prediction = knr.predict(xtest)
     r = knr.score(xtest,ytest)
     print("Accuracy of K-Neighbors Regressor when k = 5: ",end='')
     print(r)
+    #--AVG--
+    count = 0
+    for i in range(len(prediction)):
+        count = count + prediction[i]
+    count = count/len(prediction)
+    print("Average value of a house from the predicted data = " + str(count))
+    #-------
+    print()
     knr = KNeighborsRegressor(n_neighbors=10)
     knr = knr.fit(xtrain,np.ravel(ytrain))
     prediction = knr.predict(xtest)
     r = knr.score(xtest,ytest)
     print("Accuracy of K-Neighbors Regressor when k = 10: ",end='')
     print(r)
+    #--AVG--
+    count = 0
+    for i in range(len(prediction)):
+        count = count + prediction[i]
+    count = count/len(prediction)
+    print("Average value of a house from the predicted data = " + str(count))
+    #-------
+    print()
